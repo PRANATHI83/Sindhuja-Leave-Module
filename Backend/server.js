@@ -9,7 +9,7 @@ const pool = new Pool({
     user: 'postgres', // Replace with your PostgreSQL username
     host: 'postgres',
     database: 'leave_management',
-    password: 'admin1023', // Replace with your PostgreSQL password
+    password: 'admin1234', // Replace with your PostgreSQL password
     port: 5432,
 });
 
@@ -138,5 +138,5 @@ app.delete('/api/leave-requests', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running at http://13.233.115.205:${port}`);
+    console.log(`Server running at http://3.108.193.252:${port}`);
 });
