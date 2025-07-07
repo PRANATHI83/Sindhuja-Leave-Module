@@ -2,8 +2,10 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:13
-    container_name: leave_postgres
+    image: postgres
+    container_name: postgres-leave
+    ports:
+      - "5435:5432"
     environment:
       POSTGRES_DB: leave_management
       POSTGRES_USER: postgres
@@ -13,31 +15,44 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      leave-network: {}
 
   backend:
     build: ./Backend
-    container_name: leave_backend
+    container_name: backend-leave
     ports:
       - "3202:3202"
     depends_on:
       - postgres
+    networks:
+      leave-network: {}
 
   employee-leave:
-    build: ./Employee-leave
-    container_name: leave_employee
+    build: ./employee-leave
+    container_name: employee-leave-ui
     ports:
       - "8004:80"
     depends_on:
       - backend
+    networks:
+      leave-network: {}
 
   hr-leave:
-    build: ./HR-leave
-    container_name: leave_hr
+    build: ./hr-leave
+    container_name: hr-leave-ui
     ports:
+
       - "8005:80"
+
     depends_on:
       - backend
+    networks:
+      leave-network: {}
 
 volumes:
   pgdata:
+
+networks:
+  leave-network: {}
 
