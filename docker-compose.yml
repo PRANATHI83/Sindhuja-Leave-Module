@@ -5,7 +5,7 @@ services:
     image: postgres
     container_name: postgres-leave
     ports:
-      - "5435:5432"
+      - "5202:5432"
     environment:
       POSTGRES_DB: leave_management
       POSTGRES_USER: postgres
